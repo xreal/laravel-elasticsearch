@@ -75,6 +75,14 @@ class Factory
                 $clientBuilder->setLogger($logObject);
             }
         }
+        
+        if ($myCert = Arr::get($config, 'sslcert')) {
+            $clientBuilder->setSSLVerification($myCert);
+        }
+
+        if ($basicAuth = Arr::get($config, 'basic_auth')) {            
+            $clientBuilder->setBasicAuthentication($basicAuth['user'], $basicAuth['password']);
+        }    
 
         // Configure tracer
         if ($tracer = Arr::get($config, 'tracer')) {
